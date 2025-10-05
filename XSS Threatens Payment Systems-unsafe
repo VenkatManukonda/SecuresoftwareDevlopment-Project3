@@ -1,0 +1,7 @@
+UserInput = GetInput("Enter Name")
+RenderPage("Welcome " + UserInput)
+If the user enters <script>stealCookies()</script>, the browser executes it, compromising security.
+Secure Example with Encoding
+UserInput = GetInput("Enter Name")
+SafeOutput = HTMLEncode(UserInput)
+RenderPage("Welcome " + SafeOutput)
