@@ -1,0 +1,8 @@
+UserInput = GetInput("Enter Card Number")
+SQLQuery = "SELECT * FROM Payments WHERE CardNumber = '" + UserInput + "';"
+Result = Execute(SQLQuery)
+This concatenates untrusted input, opening the door for injection.
+Secure Example (Pseudocode)
+UserInput = GetInput("Enter Card Number")
+SQLQuery = "SELECT * FROM Payments WHERE CardNumber = ?"
+Result = ExecuteWithParameters(SQLQuery, UserInput)
