@@ -1,0 +1,17 @@
+FUNCTION ProcessPayment(UserInput):
+    START SecureSession WITH TLS
+    IF ValidateUser(UserInput.Credentials) == FALSE:
+        RETURN "Authentication Failed"
+    ENDIF
+
+    CleanedData = SanitizeInput(UserInput.PaymentDetails)
+    IF ValidateTransaction(CleanedData) == FALSE:
+        RETURN "Invalid Transaction"
+    ENDIF
+
+    PREPARE SQLQuery WITH Parameters (CleanedData)
+    EXECUTE SQLQuery USING ParameterizedStatement
+
+    LOG TransactionEvent WITH Timestamp AND UserID
+    RETURN "Payment Successful"
+ENDFUNCTION
