@@ -1,0 +1,10 @@
+FUNCTION SecureDatabaseTransaction(UserData):
+    IF NOT ValidateInput(UserData):
+        RETURN "Invalid Data"
+    ENDIF
+
+    SQLQuery = "INSERT INTO Transactions (UserID, Amount, CardNumber) VALUES (?, ?, ?)"
+    EXECUTE SQLQuery WITH PARAMETERS (UserData.ID, UserData.Amount, UserData.Card)
+
+    RETURN "Transaction Completed"
+ENDFUNCTION
